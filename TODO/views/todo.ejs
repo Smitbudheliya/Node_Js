@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Todo</title>
+</head>
+
+<body>
+    <h2 align="center">Add Todo</h2>
+    <a href="/show">Show Task</a>
+    <form action="/add" method="POST">
+        <table align="center" border="1">
+            <tr>
+                <td>Enter Task</td>
+                <td>
+                    <input type="text" name="task" placeholder="Enter Task" required />
+                </td>
+            </tr>
+
+            <tr>
+                <td>Type</td>
+                <td>
+                    <select name="type">
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </td>
+            </tr>
+            <td></td>
+            <td> <input type="submit" value="Add Todo"></td>
+        </table>
+
+    </form>
+</body>
+
+</html>

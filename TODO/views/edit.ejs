@@ -1,36 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Edit Todo</title>
 </head>
-
 <body>
-    <h2 align="center">Edit Todo</h2>
-    <a href="/show">Show Task</a>
-    <form action="/edit/<%= todo._id %>" method="POST">
-        <table align="center" border="1">
-            <tr>
-                <td>Enter Task</td>
-                <td>
-                    <input type="text" name="task" value="<%= todo.task %>" required />
-                </td>
-            </tr>
+    <h1>Edit Todo</h1>
 
-            <tr>
-                <td>Type</td>
-                <td>
-                    <select name="type">
-                        <option value="Personal" <%= todo.type === 'Personal' ? 'selected' : '' %>>Personal</option>
-                        <option value="Work" <%= todo.type === 'Work' ? 'selected' : '' %>>Work</option>
-                        <option value="Other" <%= todo.type === 'Other' ? 'selected' : '' %>>Other</option>
-                    </select>
-                </td>
-            </tr>
-            <td></td>
-            <td> <input type="submit" value="Update Todo"></td>
-        </table>
-
+    <form action="/todo/<%= todo._id %>?_method=PUT" method="POST">
+        <input type="text" name="title" value="<%= todo.title %>" required>
+        <input type="text" name="type" value="<%= todo.type %>" required>
+        <button type="submit">Update</button>
     </form>
+
+    <a href="/">Back</a>
 </body>
 </html>

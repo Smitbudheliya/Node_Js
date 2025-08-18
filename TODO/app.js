@@ -1,53 +1,56 @@
 const express = require('express');
-const path = require('path');
-const db = require('./config/db');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const Todo = require('./models/todoModel');
+
 const app = express();
-const port = 3000;
 
-app.use(express.urlencoded({ extended: true }));
+// Middleware
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
-
+// Home page - show all todos
 app.get('/', async (req, res) => {
-    res.render('todo');
-});
-
-app.post('/add', async (req, res) => {
-    const { task, type } = req.body;
-    await Todo.create({ task, type });
-    res.redirect('/');
-});
-
-app.get('/show', async (req, res) => {
     const todos = await Todo.find();
-    return res.render('show', {
-        todos: todos
-    });
+    res.render('todo', { todos });
 });
 
-app.post('/delete/:id', async (req, res) => {
-    await Todo.findByIdAndDelete(req.params.id);
-    res.redirect('/show');
+// Create todo
+app.post('/todo', async (req, res) => {
+    try {
+        await Todo.create(req.body);
+        res.redirect('/');
+    } catch (err) {
+        res.send("Error: " + err.message);
+    }
 });
 
-app.get('/edit/:id', async (req, res) => {
+// Edit form
+app.get('/todo/:id/edit', async (req, res) => {
     const todo = await Todo.findById(req.params.id);
     res.render('edit', { todo });
 });
 
-app.post('/edit/:id', async (req, res) => {
-    const { task, type } = req.body;
-    await Todo.findByIdAndUpdate(req.params.id, { task, type });
-    res.redirect('/show');
+// Update todo
+app.put('/todo/:id', async (req, res) => {
+    await Todo.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect('/');
 });
 
+// Show single todo
+app.get('/todo/:id', async (req, res) => {
+    const todo = await Todo.findById(req.params.id);
+    res.render('show', { todo });
+});
 
-app.listen(port, (err) => {
-    if (err) {
-        console.error('Error starting server:', err);
-        return;
-    }
-    console.log(`Server running on http://localhost:${port}`);
+// Delete todo
+app.delete('/todo/:id', async (req, res) => {
+    await Todo.findByIdAndDelete(req.params.id);
+    res.redirect('/');
+});
+
+// Start server
+app.listen(3000, () => {
+    console.log("🚀 Server running at http://localhost:3000");
 });

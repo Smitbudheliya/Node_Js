@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/todo')
-const db = mongoose.connection;
-db.once('open', (err) => {
-    if (err) {
-        console.error('Connection error:', err);
-    }
-    console.log('DB connected successfully');
+mongoose.connect('mongodb://127.0.0.1:27017/todoApp', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
-module.exports = db;
+.then(() => console.log("✅ MongoDB Connected"))
+.catch(err => console.log("❌ MongoDB Error:", err));
+
+module.exports = mongoose;

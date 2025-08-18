@@ -1,40 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Todo</title>
+    <title>View Todo</title>
 </head>
-
 <body>
-    <h2 align="center">Show Todo</h2>
-    <a href="/">Add Todo</a>
-    <table align="center" border="1">
-        <tr>
-            <th>Task</th>
-            <th>Type</th>
-            <th>Action</th>
-        </tr>
-        <% todos.map((todo,i)=>{ %>
-            <tr>
-                <td>
-                    <%= todo.task %>
-                </td>
-                <td>
-                    <%= todo.type %>
-                </td>
-                <td>
-                    <form action="/delete/<%= todo._id %>" method="POST" style="display:inline;">
-                        <button type="submit">Delete</button>
-                    </form>
-                    <form action="/edit/<%= todo._id %>" method="GET" style="display:inline;">
-                        <button type="submit">Edit</button>
-                    </form>
-                </td>
-            </tr>
-            <% }) %>
-    </table>
-</body>
+    <h1>Todo Details</h1>
+    <p><strong>Title:</strong> <%= todo.title %></p>
+    <p><strong>Type:</strong> <%= todo.type %></p>
 
+    <a href="/">Back</a>
+</body>
 </html>

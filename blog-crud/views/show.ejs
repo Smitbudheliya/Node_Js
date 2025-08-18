@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Blog</title>
+  <style>
+    body {
+      background: #00ffea56;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #333;
+      text-decoration: none;
+      font-size: 20px;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+      flex: 1;
+      max-width: 350px;
+      margin: 10px auto;
+    }
+
+    .search-box input {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      flex: 1;
+    }
+
+    .search-box button {
+      background: #ffb400;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .navbar-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .btn-outline-primary {
+      border: 2px solid #007bff;
+      color: #007bff;
+      background: transparent;
+    }
+
+    .btn-primary {
+      background: #007bff;
+      color: white;
+      border: none;
+    }
+
+    /* Blog grid */
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    /* Blog card */
+    .blog-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      background: #fff;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .blog-card img {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+      display: block;
+    }
+
+    .card-body {
+      padding: 15px;
+    }
+
+    .category-badge {
+      background: #ffe7d4;
+      color: #ff7b00;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    .card-body h5 {
+      margin: 10px 0 5px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .card-body p {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .btn-read {
+      background: linear-gradient(90deg, #ff7b00, #ffb347);
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 20px;
+      padding: 6px 14px;
+      text-decoration: none;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="/">MyBlog</a>
+
+    <form class="search-box">
+      <input type="search" placeholder="Search blogs...">
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="navbar-actions">
+      <a href="/" class="btn btn-outline-primary">Add Blog</a>
+      <a href="/show" class="btn btn-primary">Show Blogs</a>
+    </div>
+  </nav>
+
+  <!-- Blog cards -->
+  <div class="container">
+    <div class="row">
+      <% blog.forEach((val)=> { %>
+        <div class="blog-card">
+          <img src="/uploads/<%= val.profile %>" alt="<%= val.title %>">
+          <div class="card-body">
+            <span class="category-badge">
+              <%= val.category %>
+            </span>
+            <h5>
+              <%= val.title %>
+            </h5>
+            <p>
+              <%= val.description %>
+            </p>
+            <a href="#" class="btn-read">Read more</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+
+</html>

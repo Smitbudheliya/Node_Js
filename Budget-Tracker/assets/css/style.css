@@ -1,0 +1,87 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #e8f0fe;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.top-cards {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-section, .table-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 48%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+}
+
+button {
+  padding: 8px 12px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button.reset {
+  background: #dc3545;
+  width: 100%;
+}
+
+button.remove {
+  background: #dc3545;
+  color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background: #f2f2f2;
+}

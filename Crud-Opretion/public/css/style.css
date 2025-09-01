@@ -1,0 +1,180 @@
+body {
+    background:grey;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar-custom {
+    background: black;
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Category Cards */
+.board-column {
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+}
+
+/* Glass inputs ke andar text ko dark rakhne ke liye */
+.input-glass {
+    background: rgba(255, 255, 255, 0.85) !important;
+    color: #000 !important;
+    /* Text dark */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* dropdown ke andar options bhi dark */
+.input-glass option {
+    color: #000 !important;
+}
+
+
+
+.board-column:hover {
+    transform: translateY(-6px);
+}
+
+.board-header {
+    font-weight: bold;
+    text-align: center;
+    padding: 12px;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.bg-open {
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+}
+
+.bg-progress {
+    background: linear-gradient(90deg, #f7971e, #ffd200);
+    color: #000 !important;
+}
+
+.bg-review {
+    background: linear-gradient(90deg, #56ab2f, #a8e063);
+}
+
+.bg-done {
+    background: linear-gradient(90deg, #8e2de2, #4a00e0);
+}
+
+/* Task Cards */
+.task-card {
+    border-radius: 14px;
+    background: #ffffff6c;
+    transition: 0.3s;
+    border: none;
+}
+
+.task-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.task-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.badge {
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+}
+
+.add-btn {
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.navbar-custom {
+    background: rgba(0, 0, 0, 0.651);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+}
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Gradient Heading */
+.text-gradient {
+    background: linear-gradient(90deg, #7e3ad8, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Input Glass Effect */
+.input-glass {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: none !important;
+    color: #fff !important;
+}
+
+.input-glass:focus {
+    background: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 0 10px rgba(0, 114, 255, 0.6);
+    color: #fff !important;
+}
+
+/* Placeholder color */
+.input-glass::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Category Buttons */
+.btn-check+.btn {
+    border-radius: 30px;
+    font-weight: 500;
+    padding: 6px 16px;
+    transition: 0.3s;
+}
+
+.btn-check:checked+.btn {
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    color: #fff;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 114, 255, 0.6);
+}
+
+/* Submit Button */
+.btn-primary {
+    border-radius: 30px;
+    font-weight: bold;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 18px rgba(0, 114, 255, 0.5);
+}
+
+

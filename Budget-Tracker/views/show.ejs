@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Budget Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body style="background-image: url('');">
+  <div class="container">
+    <h1>Budget Tracker</h1>
+    <div class="top-cards">
+      <div class="card" style="background-color: rgba(0, 0, 255, 0.571);">Total Budget: <%= budget.toFixed(2) %>
+      </div>
+      <div class="card" style="background-color: rgba(255, 0, 0, 0.576);">Total Expenses: <%= totalExpenses.toFixed(2)
+          %>
+      </div>
+      <div class="card" style="background-color: #80ff00b2;">Budget Left: <%= budgetLeft.toFixed(2) %>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="form-section"
+        style="border: 1px; border-top-left-radius: 8%; border-end-start-radius: 8%; margin-right: 10px; padding: 30px; background-color: transparent;">
+        <h2>Add Budget</h2>
+        <form action="/add-budget" method="POST">
+          <input type="number" name="totalBudget" placeholder="Budget" required>
+          <button type="submit" style="background-color: rgba(0, 0, 255, 0.571);">Add Budget</button>
+        </form>
+
+        <h2>Add Expense</h2>
+        <form action="/add-expense" method="POST">
+          <input type="text" name="title" placeholder="Expense Title" required>
+          <input type="number" name="amount" placeholder="Amount" required>
+          <button type="submit" type="submit" style="background-color: rgba(0, 0, 255, 0.571);">Add Expense</button>
+        </form>
+
+        <form action="/reset" method="POST">
+          <button type="submit" class="reset" style="background-color: rgba(255, 0, 0, 0.576);">Reset All</button>
+        </form>
+      </div>
+
+      <div class="table-section" style="border: 1px; border-top-right-radius: 8%; border-end-end-radius: 8%;">
+        <h2>Expense History:</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Expense Name</th>
+              <th>Amount</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if(expenses.length> 0) { %>
+              <% expenses.forEach(expense=> { %>
+                <tr>
+                  <td>
+                    <%= expense.title %>
+                  </td>
+                  <td>
+                    <%= expense.amount.toFixed(2) %>
+                  </td>
+                  <td>
+                    <form action="/delete-expense/<%= expense._id %>" method="POST">
+                      <button type="submit" class="remove"
+                        style="background-color: rgba(255, 0, 0, 0.576);">Remove</button>
+                    </form>
+                  </td>
+                </tr>
+                <% }) %>
+                  <% } else { %>
+                    <tr>
+                      <td colspan="3" style="text-align:center;">No Expenses Added</td>
+                    </tr>
+                    <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="chart-container" style="width: 600px; height: 400px;  display: flex;">
+    <canvas id="myChart"></canvas>
+    <canvas id="myChart2" style="margin-left: 250px;"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    const ctx2 = document.getElementById('myChart2');
+
+    new Chart(ctx2, {
+      type: 'pie',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+
+        <div class="blog-card">
+            <img src="/uploads/<%= val.profile %>" alt="<%= val.title %>">
+            <div class="card-body">
+                <span class="category-badge">
+                    <%= val.category %>
+                </span>
+                <h5>
+                    <%= val.title %>
+                </h5>
+                <p>
+                    <%= val.description %>
+                </p>
+                <a href="/views/show.ejs" class="btn-read">back</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,126 +4,130 @@ const Admin = require('../model/adminModel');
 const path = require('path');
 const fs = require('fs');
 
-module.exports.admin = async(req,res) => {
-   try {
-     return res.render('dashboards');
-   }catch(err)
- {
+
+module.exports.admin = async (req, res) => {
+  try {
+     if(req.cookie.admin && req.cookie.admin._id){
+      return res.render('Dashboards');
+    }
+    else{
+      return res.redirect("/")
+    }
+  } catch (err) {
     console.log(err);
     res.redirect('/admin');
- }
-    
- }
+  }
 
- module.exports.addForm = async(req,res) => {
-   try {
-     return res.render('addAdmin');
-   }catch(err)
- {
+}
+
+module.exports.addForm = async (req, res) => {
+  try {
+    return res.render('addAdmin');
+  } catch (err) {
     console.log(err);
     res.redirect('/admin');
- }
-    
- }
+  }
 
- module.exports.viewForm = async(req,res) => {
-    try{
-      var search ="";
-       if(req.query.search) {
-        search = req.query.search
-      }
-      let adminData = await Admin.find({
-        // status: true,
-         $or : [
+}
+
+module.exports.viewForm = async (req, res) => {
+  try {
+    var search = "";
+    if (req.query.search) {
+      search = req.query.search
+    }
+    let adminData = await Admin.find({
+      // status: true,
+      $or: [
         {
-          name : {$regex : search,$options : 'i' }
+          name: { $regex: search, $options: 'i' }
         },
         {
-          email : {$regex : search,$options : 'i' }
+          email: { $regex: search, $options: 'i' }
         },
         {
-          city : {$regex : search,$options : 'i' }
+          city: { $regex: search, $options: 'i' }
         }
       ]
-    
-        
-      })
-     
-        return res.render('viewAdmin',{
-          adminData
-        });
 
-    }catch(err){
-        console.log(err);
-        return res.redirect('/admin');
-        
-    }
- }
 
- module.exports.insertAdmin = async(req,res) => {
-  try{
-    console.log(req.body);
-    console.log(req.file);
-    if(req.file){
-        req.body.profile = req.file.filename;
-        req.body.create_date = moment().format('YYYY-MM-DD HH:mm:ss A');
-        req.body.update_date = moment().format('YYYY-MM-DD HH:mm:ss A');
-        req.body.password = await bcrypt.hash(req.body.password,10);
-        req.body.name = req.body.fname + " " + req.body.lname;
+    })
 
-    }
-     let adminData = await Admin.create(req.body);
-      console.log(adminData);
-     if(adminData){
-      console.log("data inserted");
-      return res.redirect('/admin/formAdd');
-     }  else {
-        console.log("data not inserted");
-        return res.redirect('/admin/formAdd');
-     }
-  }
-  catch(err){
+    return res.render('viewAdmin', {
+      adminData
+    });
+
+  } catch (err) {
     console.log(err);
     return res.redirect('/admin');
-    
+
   }
- }
+}
+
+module.exports.insertAdmin = async (req, res) => {
+  try {
+    console.log(req.body);
+    console.log(req.file);
+    if (req.file) {
+      req.body.profile = req.file.filename;
+      req.body.create_date = moment().format('YYYY-MM-DD HH:mm:ss A');
+      req.body.update_date = moment().format('YYYY-MM-DD HH:mm:ss A');
+      req.body.password = await bcrypt.hash(req.body.password, 10);
+      req.body.name = req.body.fname + " " + req.body.lname;
+
+    }
+    let adminData = await Admin.create(req.body);
+    console.log(adminData);
+    if (adminData) {
+      console.log("data inserted");
+      return res.redirect('/admin/formAdd');
+    } else {
+      console.log("data not inserted");
+      return res.redirect('/admin/formAdd');
+    }
+  }
+  catch (err) {
+    console.log(err);
+    return res.redirect('/admin');
+
+  }
+}
 //delete krne ke lia
- module.exports.deleteAdmin = async(req,res) => {
-  try{
+module.exports.deleteAdmin = async (req, res) => {
+  try {
     let adminRecord = await Admin.findById(req.params.adminId);
-    if(adminRecord){
-     try{
-          let imagePath = path.join(__dirname,'..','uploads',adminRecord.profile);
-          fs.unlinkSync(imagePath)
-     }
-     catch(err){
-       console.log(err);
-       return res.redirect('/admin/formAdd');
-     }
+    if (adminRecord) {
+      try {
+        let imagePath = path.join(__dirname, '..', 'uploads', adminRecord.profile);
+        fs.unlinkSync(imagePath)
+      }
+      catch (err) {
+        console.log(err);
+        return res.redirect('/admin/formAdd');
+      }
     }
     let deleteAdmin = await Admin.findByIdAndDelete(req.params.adminId);
-    if(deleteAdmin) {
+    if (deleteAdmin) {
       console.log("Admin deleted");
       return res.redirect('/admin/viewPage');
-      
-    }else {
+
+    } else {
       console.log("Admin not deleted");
       return res.redirect('/admin/formAdd');
     }
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return res.redirect('/admin/formAdd');
-    
-  }
- }
 
- //edit
- module.exports.editAdmin = async(req,res) => {
-  try{
+  }
+}
+
+//edit
+module.exports.editAdmin = async (req, res) => {
+  try {
     let adminData = await Admin.findById(req.params.adminId);
-    if(adminData){
-      return res.render('updateAdmin',{
+    if (adminData) {
+      return res.render('updateAdmin', {
         adminData
       })
     }
@@ -132,14 +136,14 @@ module.exports.admin = async(req,res) => {
       return res.redirect('/admin/viewPage');
     }
 
-  }catch(err){
+  } catch (err) {
     console.log(err);
     return res.redirect('/admin/formAdd');
-    
-  } 
- }
 
- //update
+  }
+}
+
+//update
 //update
 module.exports.editAdminData = async (req, res) => {
   try {
@@ -168,7 +172,7 @@ module.exports.editAdminData = async (req, res) => {
       }
     }
 
-     req.body.name = `${req.body.fname} ${req.body.lname}`;
+    req.body.name = `${req.body.fname} ${req.body.lname}`;
     // Dates update karo
     req.body.update_date = moment().format('YYYY-MM-DD HH:mm:ss A');
 
@@ -188,19 +192,19 @@ module.exports.editAdminData = async (req, res) => {
   }
 };
 
-module.exports.singleAdmin = async(req,res) => {
+module.exports.singleAdmin = async (req, res) => {
   console.log(req.params.id);
-try{
+  try {
     let adminData = await Admin.findById(req.params.id);
-  console.log(adminData);
-  return res.status(200).json({
-    status:"success",data:adminData
-  })
-  
+    console.log(adminData);
+    return res.status(200).json({
+      status: "success", data: adminData
+    })
 
-}catch(err){
-  console.log(err);
-  return res.redirect('/admin/formAdd');
-}
-  
+
+  } catch (err) {
+    console.log(err);
+    return res.redirect('/admin/formAdd');
+  }
+
 }

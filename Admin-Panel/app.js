@@ -4,6 +4,7 @@ const port = 8002;
 const app = express();
 
 
+
 app.set('view engine', 'ejs');
 const db = require('./config/db');
 const Admin = require('./model/adminModel')
